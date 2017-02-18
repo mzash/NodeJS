@@ -1,0 +1,9 @@
+      O
+      |
+      O0 -d  (txt)
+      |
+      O1 -d
+      |
+      02 -d
+      |
+      O  (txt > some filed)

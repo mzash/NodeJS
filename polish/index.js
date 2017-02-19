@@ -9,13 +9,13 @@ function Polish(){
 Polish.prototype.eval = function(expression){
 
     expression = expression.replace(/\(\-/g, '(0-').replace(/^-/, '0-');
-    var array = expression.match(/(\d*\.\d*|\d+)|[+,\-,*,/,^,(,),!]{1}|sqrt|abs/g);
+    var array = expression.match(/(\d*\.\d*|\d+)|[+,\-,*,/,^,(,),!]{1}|nroot|sqrt|abs/g);
 
-    this.expressionArray = this.toPolish(array);
-    return this.doCalculation();
+    var polishArray = toPolish(array);
+    return doCalculation(polishArray);
 };
 
-Polish.prototype.toPolish = function(inputArray){
+function toPolish(inputArray){
     var result = [];
     var stack = [];
     for(var i = 0; i<inputArray.length;i++){
@@ -61,13 +61,13 @@ Polish.prototype.toPolish = function(inputArray){
     }
     return result;
 };
-Polish.prototype.doCalculation = function(){
+function doCalculation(polishArray){
     var stack = new Array();
     var result;
-    for(var i = 0; i < this.expressionArray.length; i++) {
-        if(operations.legend[this.expressionArray[i]]){
+    for(var i = 0; i < polishArray.length; i++) {
+        if(operations.legend[polishArray[i]]){
             try{
-                var operation = operations.legend[this.expressionArray[i]];
+                var operation = operations.legend[polishArray[i]];
                 var args;
                 var a;
                 if(operation.elements == 2){
@@ -85,7 +85,7 @@ Polish.prototype.doCalculation = function(){
                 return ex.message;
             }
         } else {
-            stack.push(parseFloat(this.expressionArray[i]));
+            stack.push(parseFloat(polishArray[i]));
         }
     }
     result = stack.pop();

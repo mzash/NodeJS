@@ -8,6 +8,7 @@ function Operations() {
         '/': {function: this.divide, elements: 2, order: 2 },
         '^': {function: this.raising, elements: 2, order: 3 },
         'sqrt': {function: this.sqrt, elements: 1, order: 4 },
+        'nroot': {function: this.nroot, elements: 2, order: 4 },
         '!' : {function: this.factorial, elements:1, order: 4 },
         'abs' : {function: this.absoluteValue, elements:1, order: 4 }
     }
@@ -37,6 +38,10 @@ Operations.prototype.sqrt = function (a) {
     return Math.sqrt(a);
 };
 
+Operations.prototype.nroot = function (a, n) {
+    return this.raising(a, this.divide(1, n));
+};
+
 Operations.prototype.raising = function (a, b) {/*
     var result = 1;
     if(b > 0){
@@ -49,7 +54,7 @@ Operations.prototype.raising = function (a, b) {/*
         result = this.divide(result, internalResult);
     }
     return result;*/
-    return Math.pow(a, b)
+    return Math.pow(a, b);
 };
 
 Operations.prototype.factorial = function (a) {
@@ -71,4 +76,4 @@ Operations.prototype.absoluteValue = function (a) {
 
 module.exports = new Operations();
 
-log('polish.js is required');
+log('operations.js is required');

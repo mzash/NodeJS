@@ -2,14 +2,14 @@ var log = require('logger')(module);
 
 function Operations() {
     this.legend = {
-        '+': {function: this.addition, elements: 2},
-        '-': {function: this.difference, elements: 2},
-        '*': {function: this.multiplication, elements: 2},
-        '/': {function: this.divide, elements: 2},
-        'sqrt': {function: this.sqrt, elements: 1},
-        '!' : {function: this.factorial, elements:1},
-        'abs' : {function: this.absoluteValue, elements:1},
-        '^': {function: this.raising, elements: 2}
+        '+': {function: this.addition, elements: 2, order:  1},
+        '-': {function: this.difference, elements: 2, order: 1 },
+        '*': {function: this.multiplication, elements: 2, order: 2 },
+        '/': {function: this.divide, elements: 2, order: 2 },
+        '^': {function: this.raising, elements: 2, order: 3 },
+        'sqrt': {function: this.sqrt, elements: 1, order: 4 },
+        '!' : {function: this.factorial, elements:1, order: 4 },
+        'abs' : {function: this.absoluteValue, elements:1, order: 4 }
     }
 }
 
@@ -37,7 +37,7 @@ Operations.prototype.sqrt = function (a) {
     return Math.sqrt(a);
 };
 
-Operations.prototype.raising = function (a, b) {
+Operations.prototype.raising = function (a, b) {/*
     var result = 1;
     if(b > 0){
         for (var i=0; i < b; i++){
@@ -48,7 +48,8 @@ Operations.prototype.raising = function (a, b) {
         var internalResult = this.raising(a, b * -1);
         result = this.divide(result, internalResult);
     }
-    return result;
+    return result;*/
+    return Math.pow(a, b)
 };
 
 Operations.prototype.factorial = function (a) {
